@@ -1,6 +1,6 @@
 # Diablo Survivors
 
-**v0.17 beta · Windows 10 64-bit**
+**v0.18 beta · Windows 10 64-bit**
 
 ![Diablo I](https://img.shields.io/badge/Diablo_I-GOG_1.0.9.2-8b2525?style=flat-square)
 ![Diablo II Classic](https://img.shields.io/badge/Diablo_II-Classic-8b2525?style=flat-square)
@@ -11,9 +11,32 @@
 
 Diablo Survivors is a survival action game inspired by Vampire Survivors, using graphics and audio from your own installation of Diablo I, classic Diablo II, or Diablo II with Lord of Destruction. Choose a character, survive waves of enemies, collect experience, and build a powerful combination of upgrades before the timer runs out.
 
-[Download the Windows release](Diablo_Survivors_v0.17_beta_Windows_x64.zip)
+## Screenshots
+
+![Diablo Survivors setup](screenshots/s00.jpg)
+
+![Diablo Survivors screenshot 1](screenshots/s01.jpg)
+
+![Diablo Survivors screenshot 2](screenshots/s02.jpg)
+
+![Diablo Survivors screenshot 3](screenshots/s03.jpg)
+
+## Download Latest Version
+
+[Download the currently packaged release (v0.18 beta)](Diablo_Survivors_v0.18_beta_Windows_x64.zip)
 
 **First-time setup can take a few minutes** while the game imports your selected installation's assets and builds its local asset cache. Let the import finish; subsequent launches reuse the cache.
+
+Please note that updates may require re-building the asset cache.
+
+## What's new in v0.18 beta
+
+- **Offscreen combat audio fixed:** projectile hits and enemy deaths are silent outside the visible play area. Queued sounds recheck visibility, and active sounds stop when their source leaves the screen.
+- **Goatmen death animations fixed:** goatmen now use their original death and corpse clips instead of an idle-animation fallback. Existing asset caches update automatically.
+- **Goblin treasure made more visible:** treasure drops appear as a glowing gold pile with rising golden particles and a TREASURE label.
+- **Walk-over treasure collection:** goblin treasure stays on the ground until you walk onto it. Pickup-range upgrades, XP magnets, and Orb Harvest no longer pull it toward you.
+- **Clear treasure rewards:** collecting treasure plays a chime and displays the gold, XP, and actual healing received. Uncollected treasure is preserved when ordinary orb cleanup runs.
+- **Area music fixes:** corrected the outdoor Act I soundtrack filename and refreshed music caching for reliable playback. Areas missing their requested track use an available soundtrack; Act V has a fallback when expansion music media is absent.
 
 ## Choose your Diablo
 
@@ -68,12 +91,3 @@ Only one supported game installation is needed. Diablo II: Resurrected / Inferna
 - **End-of-run rewards:** see kills, collected experience, completed challenges, and gold earned.
 - **Achievements and records:** track milestones and repeat challenge completions for bragging rights.
 
-## Screenshots
-
-![Diablo Survivors setup](screenshots/s00.jpg)
-
-![Diablo Survivors screenshot 1](screenshots/s01.jpg)
-
-![Diablo Survivors screenshot 2](screenshots/s02.jpg)
-
-![Diablo Survivors screenshot 3](screenshots/s03.jpg)
