@@ -72,7 +72,6 @@ Only one supported game installation is needed. Diablo II: Resurrected / Inferna
 
 ## Explore and collect
 
-- **Wrapping maps:** continue across an area's edge to emerge on the opposite side.
 - **Glowing pickups:** collect healing, speed boosts, XP magnets, and rare Orb Harvest boosts that draw experience orbs from across the map.
 - **Timed boost bars:** see active bonuses and their remaining duration; duration upgrades extend their effects.
 - **Nearby collectible minimap:** locate pickups and track the treasure goblin's yellow star.
