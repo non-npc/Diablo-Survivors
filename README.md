@@ -54,8 +54,8 @@ Only one supported game installation is needed. Diablo II: Resurrected / Inferna
 
 ## Survive and progress
 
-- **Three difficulties per area:** Easy lasts 8 minutes, Hard lasts 12, and Legendary lasts 16.
-- **Sequential unlocks:** clear Easy to unlock Hard, then Hard to unlock Legendary. A Legendary clear unlocks and selects the next area.
+- **Three difficulties per area:** Normal lasts 8 minutes, Nightmare lasts 12, and Hell lasts 16.
+- **Sequential unlocks:** clear Normal to unlock Nightmare, then Nightmare to unlock Hell. A Hell clear unlocks and selects the next area.
 - **Enemy surges:** melee enemies, ranged attackers, and elites arrive in increasingly demanding surges with recovery periods.
 - **Area-specific enemies and challenges:** complete progressively harder objectives to earn gold. Each challenge pays its gold reward only once.
 - **Saved progression:** character unlocks, area clears, permanent upgrades, achievements, and records persist between sessions.
