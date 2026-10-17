@@ -1,6 +1,6 @@
 # Diablo Survivors
 
-**v0.19 beta · Windows 10 64-bit**
+**v0.21 beta · Windows 10 64-bit**
 
 ![Diablo I](https://img.shields.io/badge/Diablo_I-GOG_1.0.9.2-8b2525?style=flat-square)
 ![Diablo II Classic](https://img.shields.io/badge/Diablo_II-Classic-8b2525?style=flat-square)
@@ -10,6 +10,8 @@
 ![Windows](https://img.shields.io/badge/Windows-10_x64-0078d4?style=flat-square)
 
 Diablo Survivors is a survival action game inspired by Vampire Survivors, using graphics and audio from your own installation of Diablo I, classic Diablo II, or Diablo II with Lord of Destruction. Choose a character, survive waves of enemies, collect experience, and build a powerful combination of upgrades before the timer runs out.
+
+**Diablo II compatibility:** Diablo II and Diablo II: Lord of Destruction work with the original CD versions. Battle.net versions have not been tested and may not work.
 
 ## Screenshots
 
@@ -21,13 +23,29 @@ Diablo Survivors is a survival action game inspired by Vampire Survivors, using 
 
 ![Diablo Survivors screenshot 3](screenshots/s03.jpg)
 
+![Diablo Survivors screenshot 4](screenshots/s04.jpg)
+
 ## Download Latest Version
 
-[Download the currently packaged release (v0.19 beta)](Diablo_Survivors_v0.19_beta_Windows_x64.zip)
+Download both parts of **v0.21 beta** into the same folder:
+
+- [Part 1 (EXE)](Diablo_Survivors_v0.21_beta_Windows_x64_Setup.part1.exe)
+- [Part 2 (RAR)](Diablo_Survivors_v0.21_beta_Windows_x64_Setup.part2.rar)
+
+Run **Diablo_Survivors_v0.21_beta_Windows_x64_Setup.part1.exe** and choose an extraction folder. The second part is read automatically; WinRAR is not required. After extraction, open the **Diablo Survivors** folder and run **Diablo Survivors.exe** when ready. The extractor does not launch the game. Keep the complete game folder together in a writable location.
 
 **First-time setup can take a few minutes** while the game imports your selected installation's assets and builds its local asset cache. Let the import finish; subsequent launches reuse the cache.
 
 Please note that updates may require re-building the asset cache.
+
+
+## What's new in v0.21 beta
+
+- **Asset-cache handoff:** the game executable can recover the selected imported asset cache when opened directly, instead of silently loading the default graphics.
+- **Launch diagnostics:** startup failures remain visible in the launcher, with logs in `.local/logs` for troubleshooting different system setups.
+- **Character sprite preview:** the character window shows your character in the right column. Use the left/right arrow keys or the on-screen arrows to rotate through eight directions.
+- **Cohesive D2 terrain:** continuous outdoor ground with original trees, palms, cacti, and rocks instead of mixed transition tiles.
+- **D2 direction fixes:** corrected sprite direction lookup for movement and attacks, with refreshed cached animations.
 
 ## What's new in v0.19 beta
 
