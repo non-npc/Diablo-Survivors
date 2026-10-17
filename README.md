@@ -23,7 +23,7 @@ Diablo Survivors is a survival action game inspired by Vampire Survivors, using 
 
 ## Download Latest Version
 
-[Download the currently packaged release (v0.18 beta)](Diablo_Survivors_v0.18_beta_Windows_x64.zip)
+[Download the currently packaged release (v0.19 beta)](Diablo_Survivors_v0.19_beta_Windows_x64.zip)
 
 **First-time setup can take a few minutes** while the game imports your selected installation's assets and builds its local asset cache. Let the import finish; subsequent launches reuse the cache.
 
