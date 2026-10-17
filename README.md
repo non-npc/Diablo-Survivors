@@ -1,6 +1,6 @@
 # Diablo Survivors
 
-**v0.18 beta · Windows 10 64-bit**
+**v0.19 beta · Windows 10 64-bit**
 
 ![Diablo I](https://img.shields.io/badge/Diablo_I-GOG_1.0.9.2-8b2525?style=flat-square)
 ![Diablo II Classic](https://img.shields.io/badge/Diablo_II-Classic-8b2525?style=flat-square)
@@ -29,14 +29,10 @@ Diablo Survivors is a survival action game inspired by Vampire Survivors, using 
 
 Please note that updates may require re-building the asset cache.
 
-## What's new in v0.18 beta
+## What's new in v0.19 beta
 
-- **Offscreen combat audio fixed:** projectile hits and enemy deaths are silent outside the visible play area. Queued sounds recheck visibility, and active sounds stop when their source leaves the screen.
-- **Goatmen death animations fixed:** goatmen now use their original death and corpse clips instead of an idle-animation fallback. Existing asset caches update automatically.
-- **Goblin treasure made more visible:** treasure drops appear as a glowing gold pile with rising golden particles and a TREASURE label.
-- **Walk-over treasure collection:** goblin treasure stays on the ground until you walk onto it. Pickup-range upgrades, XP magnets, and Orb Harvest no longer pull it toward you.
-- **Clear treasure rewards:** collecting treasure plays a chime and displays the gold, XP, and actual healing received. Uncollected treasure is preserved when ordinary orb cleanup runs.
-- **Area music fixes:** corrected the outdoor Act I soundtrack filename and refreshed music caching for reliable playback. Areas missing their requested track use an available soundtrack; Act V has a fallback when expansion music media is absent.
+- **Gameplay speed control:** centered at the top of the screen, with 1×, 1.5×, 2×, 3×, 5×, and 10× settings..
+- **Windows download fix:** the distribution ZIP now includes Python's required standard-library archive, fixing the missing encodings startup error.
 
 ## Choose your Diablo
 
