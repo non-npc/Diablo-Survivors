@@ -1,6 +1,6 @@
 # Diablo Survivors
 
-**v0.21 beta · Windows 10 64-bit**
+**v0.23 beta · Windows 10 64-bit**
 
 ![Diablo I](https://img.shields.io/badge/Diablo_I-GOG_1.0.9.2-8b2525?style=flat-square)
 ![Diablo II Classic](https://img.shields.io/badge/Diablo_II-Classic-8b2525?style=flat-square)
@@ -27,17 +27,30 @@ Diablo Survivors is a survival action game inspired by Vampire Survivors, using 
 
 ## Download Latest Version
 
-Download both parts of **v0.21 beta** into the same folder:
+Download both parts of **v0.23 beta** into the same folder:
 
-- [Part 1 (EXE)](Diablo_Survivors_v0.21_beta_Windows_x64_Setup.part1.exe)
-- [Part 2 (RAR)](Diablo_Survivors_v0.21_beta_Windows_x64_Setup.part2.rar)
+- [Part 1 (EXE)](Diablo_Survivors_v0.23_beta_Windows_x64_Setup.part1.exe)
+- [Part 2 (RAR)](Diablo_Survivors_v0.23_beta_Windows_x64_Setup.part2.rar)
 
-Run **Diablo_Survivors_v0.21_beta_Windows_x64_Setup.part1.exe** and choose an extraction folder. The second part is read automatically; WinRAR is not required. After extraction, open the **Diablo Survivors** folder and run **Diablo Survivors.exe** when ready. The extractor does not launch the game. Keep the complete game folder together in a writable location.
+Run **Diablo_Survivors_v0.23_beta_Windows_x64_Setup.part1.exe** and choose an extraction folder. The second part is read automatically; WinRAR is not required. After extraction, open the **Diablo Survivors** folder and run **Diablo Survivors.exe** when ready. The extractor does not launch the game. Keep the complete game folder together in a writable location.
 
 **First-time setup can take a few minutes** while the game imports your selected installation's assets and builds its local asset cache. Let the import finish; subsequent launches reuse the cache.
 
 Please note that updates may require re-building the asset cache.
 
+
+## What's new in v0.23 beta
+
+- **Magic particles:** yellow/orange sparks around Firebolt and Firestorm; white/aqua sparks around Bone Spear.
+- **Spell visual fixes:** Bone Spear no longer has a black halo; spell tips point along their exact flight direction, including diagonal shots.
+
+- **Shorter default range:** player and enemy ranged attack distances are halved.
+- **Meaningful Long reach:** projectiles now stop at the attack-distance limit, and each tier increases both targeting and travel by 10%.
+
+## What's new in v0.22 beta
+
+- **Original caster spells:** Sorcerer/Sorceress cast Firebolt, Necromancer casts piercing Bone Spear, and Druid casts spreading Firestorm with lingering ground flames.
+- **Casting timing:** spells release during the casting gesture; Bone Spear has no fire splash. Paladin remains melee.
 
 ## What's new in v0.21 beta
 
