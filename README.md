@@ -11,6 +11,8 @@
 
 Diablo Survivors is a survival action game inspired by Vampire Survivors, using graphics and audio from your own installation of Diablo I, classic Diablo II, or Diablo II with Lord of Destruction. Choose a character, survive waves of enemies, collect experience, and build a powerful combination of upgrades before the timer runs out.
 
+[Watch gameplay footage](video/demo.mp4)
+
 **Diablo II compatibility:** Diablo II and Diablo II: Lord of Destruction work with the original CD versions. Battle.net versions have not been tested and may not work.
 
 ## Screenshots
