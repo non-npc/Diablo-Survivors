@@ -1,0 +1,3 @@
+[tool.pytest.ini_options]
+testpaths = ["manager/tests", "tests/integration", "tests/unit", "inspector/tests"]
+pythonpath = ["."]

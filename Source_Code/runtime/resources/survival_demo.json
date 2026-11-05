@@ -1,0 +1,492 @@
+{
+  "schema_version": 1,
+  "title": "The Proving Grounds",
+  "profile_id": "original-demo",
+  "player_visual": {
+    "clips": {
+      "idle": {
+        "sheet": "res://resources/hero.svg",
+        "frame_width": 48,
+        "frame_height": 64,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "res://resources/hero.svg",
+        "frame_width": 48,
+        "frame_height": 64,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "attack": {
+        "sheet": "res://resources/hero.svg",
+        "frame_width": 48,
+        "frame_height": 64,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "hit": {
+        "sheet": "res://resources/hero.svg",
+        "frame_width": 48,
+        "frame_height": 64,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "death": {
+        "sheet": "res://resources/hero.svg",
+        "frame_width": 48,
+        "frame_height": 64,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      }
+    }
+  },
+  "enemy_visual": {
+    "clips": {
+      "idle": {
+        "sheet": "res://resources/enemy.svg",
+        "frame_width": 32,
+        "frame_height": 48,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "walk": {
+        "sheet": "res://resources/enemy.svg",
+        "frame_width": 32,
+        "frame_height": 48,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "attack": {
+        "sheet": "res://resources/enemy.svg",
+        "frame_width": 32,
+        "frame_height": 48,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "hit": {
+        "sheet": "res://resources/enemy.svg",
+        "frame_width": 32,
+        "frame_height": 48,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      },
+      "death": {
+        "sheet": "res://resources/enemy.svg",
+        "frame_width": 32,
+        "frame_height": 48,
+        "frames_per_direction": [
+          1
+        ],
+        "frame_seconds": 0.1,
+        "loop": true
+      }
+    }
+  },
+  "configuration": {
+    "duration_seconds": 480,
+    "seed": 20261012,
+    "arena_width": 2200,
+    "arena_height": 1800,
+    "player": {
+      "health": 100,
+      "speed": 220,
+      "damage": 20,
+      "cooldown": 0.6,
+      "attack_range": 100,
+      "attack_targets": 3,
+      "pickup_radius": 90
+    },
+    "enemy": {
+      "health": 14,
+      "speed": 62,
+      "contact_damage": 7
+    },
+    "director": {
+      "wave_seconds": 30,
+      "spawn_interval": 1.2,
+      "max_enemies": 300
+    },
+    "upgrades": [
+      {
+        "id": "damage",
+        "title": "Weapon damage",
+        "stat": "damage",
+        "step": 0.15,
+        "mode": "multiply",
+        "description": "+15% weapon or spell damage per tier.",
+        "icon": 0,
+        "max_tier": 5
+      },
+      {
+        "id": "cooldown",
+        "title": "Quick strikes",
+        "stat": "cooldown",
+        "step": 0.1,
+        "mode": "reduce",
+        "description": "Reduce attack interval by 10% of its starting value per tier.",
+        "icon": 3,
+        "max_tier": 5
+      },
+      {
+        "id": "health",
+        "title": "Second wind",
+        "stat": "max_health",
+        "step": 25,
+        "mode": "add",
+        "description": "+25 maximum health and heal 25.",
+        "icon": 1,
+        "max_tier": 5,
+        "heal": 25
+      },
+      {
+        "id": "speed",
+        "title": "Fleet feet",
+        "stat": "speed",
+        "step": 0.08,
+        "mode": "multiply",
+        "description": "+8% starting movement speed per tier.",
+        "icon": 10,
+        "max_tier": 5
+      },
+      {
+        "id": "magnet",
+        "title": "Soul magnet",
+        "stat": "pickup_radius",
+        "step": 25,
+        "mode": "add",
+        "description": "+25 XP collection range per tier.",
+        "icon": 9,
+        "max_tier": 5
+      },
+      {
+        "id": "attacks",
+        "title": "Extra attacks",
+        "stat": "attack_count",
+        "step": 1,
+        "mode": "add",
+        "description": "+1 melee strike per attack cycle.",
+        "icon": 14,
+        "max_tier": 5,
+        "classes": [
+          "warrior"
+        ]
+      },
+      {
+        "id": "area",
+        "title": "Larger attack area",
+        "stat": "area_scale",
+        "step": 0.1,
+        "mode": "add",
+        "description": "+10% cleave reach/width or spell splash radius per tier.",
+        "icon": 18,
+        "max_tier": 5,
+        "classes": [
+          "warrior",
+          "sorcerer"
+        ]
+      },
+      {
+        "id": "targets",
+        "title": "Extra target",
+        "stat": "attack_targets",
+        "step": 1,
+        "mode": "add",
+        "description": "+1 cleave target, arrow pierce or spell splash target.",
+        "icon": 14,
+        "max_tier": 5
+      },
+      {
+        "id": "range",
+        "title": "Long reach",
+        "stat": "attack_range",
+        "step": 0.1,
+        "mode": "multiply",
+        "description": "+10% attack distance and projectile travel per tier.",
+        "icon": 3,
+        "max_tier": 5
+      },
+      {
+        "id": "armor",
+        "title": "Iron skin",
+        "stat": "armor",
+        "step": 1,
+        "mode": "add",
+        "description": "Reduce incoming contact damage by 1 per tier.",
+        "icon": 11,
+        "max_tier": 5
+      },
+      {
+        "id": "regen",
+        "title": "Regeneration",
+        "stat": "regeneration",
+        "step": 0.4,
+        "mode": "add",
+        "description": "Restore 0.4 health per second per tier.",
+        "icon": 1,
+        "max_tier": 5
+      },
+      {
+        "id": "critical",
+        "title": "Lucky strike",
+        "stat": "crit_chance",
+        "step": 0.08,
+        "mode": "add",
+        "description": "+8 percentage points of critical chance per tier.",
+        "icon": 4,
+        "max_tier": 5
+      },
+      {
+        "id": "critical_power",
+        "title": "Devastating criticals",
+        "stat": "crit_multiplier",
+        "step": 0.2,
+        "mode": "add",
+        "description": "+20 percentage points of critical damage per tier.",
+        "icon": 12,
+        "max_tier": 5,
+        "requires": "critical"
+      },
+      {
+        "id": "knockback",
+        "title": "Forceful blows",
+        "stat": "knockback",
+        "step": 8,
+        "mode": "add",
+        "description": "+8 knockback distance per tier.",
+        "icon": 4,
+        "max_tier": 5
+      },
+      {
+        "id": "kill_heal",
+        "title": "Vital harvest",
+        "stat": "kill_heal",
+        "step": 1,
+        "mode": "add",
+        "description": "Restore 1 health per defeated enemy per tier.",
+        "icon": 1,
+        "max_tier": 5
+      },
+      {
+        "id": "healing_drops",
+        "title": "Generous foes",
+        "stat": "heal_drop_chance",
+        "step": 0.03,
+        "mode": "add",
+        "description": "+3 percentage points of healing-drop chance per tier.",
+        "icon": 1,
+        "max_tier": 5
+      },
+      {
+        "id": "experience",
+        "title": "Fast learner",
+        "stat": "xp_multiplier",
+        "step": 0.1,
+        "mode": "add",
+        "description": "+10% XP earned per tier.",
+        "icon": 5,
+        "max_tier": 5
+      },
+      {
+        "id": "summon",
+        "title": "Additional minion",
+        "stat": "summon_cap",
+        "step": 1,
+        "mode": "add",
+        "description": "Summon one additional allied minion.",
+        "icon": 13,
+        "max_tier": 2
+      },
+      {
+        "id": "ally_power",
+        "title": "Empowered minions",
+        "stat": "ally_damage",
+        "step": 5,
+        "mode": "add",
+        "description": "+5 minion damage per tier.",
+        "icon": 13,
+        "max_tier": 5,
+        "requires": "summon"
+      },
+      {
+        "id": "ally_haste",
+        "title": "Restless minions",
+        "stat": "ally_cooldown",
+        "step": 0.08,
+        "mode": "reduce",
+        "description": "Reduce minion attack interval by 8% of its starting value per tier.",
+        "icon": 13,
+        "max_tier": 5,
+        "requires": "summon"
+      },
+      {
+        "id": "bleed",
+        "title": "Warrior: bleeding edge",
+        "stat": "dot_damage",
+        "step": 2,
+        "mode": "add",
+        "description": "Weapon hits inflict 2 damage/second for 3 seconds per tier.",
+        "icon": 0,
+        "max_tier": 5,
+        "classes": [
+          "warrior"
+        ]
+      },
+      {
+        "id": "retaliation",
+        "title": "Warrior: retaliation",
+        "stat": "retaliation",
+        "step": 3,
+        "mode": "add",
+        "description": "Taking damage deals 3 damage per tier to nearby foes.",
+        "icon": 4,
+        "max_tier": 5,
+        "classes": [
+          "warrior"
+        ]
+      },
+      {
+        "id": "poison",
+        "title": "Rogue: poisoned arrows",
+        "stat": "dot_damage",
+        "step": 2.5,
+        "mode": "add",
+        "description": "Arrow hits inflict 2.5 damage/second for 3 seconds per tier.",
+        "icon": 8,
+        "max_tier": 5,
+        "classes": [
+          "rogue"
+        ]
+      },
+      {
+        "id": "arrow_speed",
+        "title": "Rogue: swift arrows",
+        "stat": "projectile_speed",
+        "step": 0.15,
+        "mode": "multiply",
+        "description": "+15% starting arrow speed per tier.",
+        "icon": 3,
+        "max_tier": 5,
+        "classes": [
+          "rogue"
+        ]
+      },
+      {
+        "id": "burning",
+        "title": "Sorcerer: lingering flames",
+        "stat": "dot_damage",
+        "step": 3,
+        "mode": "add",
+        "description": "Spell hits burn for 3 damage/second for 3 seconds per tier.",
+        "icon": 2,
+        "max_tier": 5,
+        "classes": [
+          "sorcerer"
+        ]
+      },
+      {
+        "id": "splash_power",
+        "title": "Sorcerer: raging blasts",
+        "stat": "splash_ratio",
+        "step": 0.1,
+        "mode": "add",
+        "description": "+10 percentage points of firebolt splash damage per tier.",
+        "icon": 12,
+        "max_tier": 5,
+        "classes": [
+          "sorcerer"
+        ]
+      },
+      {
+        "id": "boost_duration",
+        "title": "Lasting power",
+        "stat": "boost_duration",
+        "step": 0.2,
+        "mode": "add",
+        "description": "+20% timed boost duration per tier. Extends active boosts too.",
+        "icon": 31,
+        "max_tier": 5
+      },
+      {
+        "id": "pierce",
+        "title": "Pierce",
+        "stat": "projectile_pierce",
+        "step": 1,
+        "mode": "add",
+        "description": "+1 enemy pierced per projectile. Hits enemies behind the first target.",
+        "icon": 6,
+        "max_tier": 5,
+        "classes": [
+          "rogue",
+          "sorcerer"
+        ]
+      },
+      {
+        "id": "multishot",
+        "title": "Multi-shot",
+        "stat": "projectile_count",
+        "step": 1,
+        "mode": "add",
+        "description": "+1 projectile per attack, up to 5 projectiles.",
+        "icon": 7,
+        "max_tier": 4,
+        "classes": [
+          "rogue",
+          "sorcerer"
+        ]
+      }
+    ],
+    "rare_events": {
+      "check_seconds": 30,
+      "spawn_chance": 0.08,
+      "portal_chance": 0.01
+    },
+    "challenges": [
+      {
+        "id": "skeleton-100",
+        "title": "Defeat 100 skeletons",
+        "enemy": "skeleton",
+        "target": 100
+      },
+      {
+        "id": "skeleton-250",
+        "title": "Defeat 250 skeletons",
+        "enemy": "skeleton",
+        "target": 250
+      },
+      {
+        "id": "skeleton-400",
+        "title": "Defeat 400 skeletons",
+        "enemy": "skeleton",
+        "target": 400
+      }
+    ]
+  }
+}

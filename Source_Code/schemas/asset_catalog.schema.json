@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "asset_catalog",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "catalog_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "edition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "archive": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?![\\\\/])(?![A-Za-z]:)(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+          },
+          "type": {
+            "enum": [
+              "sprite",
+              "palette",
+              "terrain",
+              "audio",
+              "metadata",
+              "image",
+              "video",
+              "text",
+              "binary",
+              "unknown"
+            ]
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "decoder": {
+            "type": "string",
+            "minLength": 1
+          },
+          "palette_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mapping": {
+            "type": "object"
+          },
+          "source_metadata": {
+            "type": "object",
+            "properties": {
+              "archive_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{64}$"
+              },
+              "block_index": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "stored_bytes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "decoded_bytes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "flags": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "archive_sha256",
+              "block_index",
+              "offset",
+              "stored_bytes",
+              "decoded_bytes",
+              "flags"
+            ],
+            "additionalProperties": false
+          },
+          "identification": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "archive",
+          "source_path",
+          "type",
+          "verified"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "catalog_id",
+    "edition_id",
+    "assets"
+  ]
+}

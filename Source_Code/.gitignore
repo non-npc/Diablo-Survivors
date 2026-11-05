@@ -1,0 +1,15 @@
+.tools/
+.local/
+.godot/
+__pycache__/
+.pytest_cache/
+*.pyc
+dist/
+*.egg-info/
+
+# Private previews decoded from the locally owned game
+/level_props/
+
+# Contributor environments and compiled output
+.venv/
+build_release/

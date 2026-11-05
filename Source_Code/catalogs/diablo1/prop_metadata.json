@@ -1,0 +1,460 @@
+{
+  "edition": "base-diablo-gog",
+  "references": [
+    "https://github.com/diasurgical/devilution/blob/master/Source/objdat.cpp",
+    "https://github.com/diasurgical/devilution/blob/master/Source/objects.cpp",
+    "https://github.com/diasurgical/devilution/blob/master/Source/themes.cpp"
+  ],
+  "regions": {
+    "CAT": [
+      {
+        "stem": "sarc",
+        "name": "Stone sarcophagus",
+        "source_path": "objects/sarc.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "InitObjects: Cathedral random sarcophagi"
+      },
+      {
+        "stem": "bcase",
+        "name": "Bookcase",
+        "source_path": "objects/bcase.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Theme library allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "book1",
+        "name": "Story book stand",
+        "source_path": "objects/book1.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "AllObjects: Cathedral floors 3-4"
+      },
+      {
+        "stem": "candle2",
+        "name": "Shrine/library candles",
+        "source_path": "objects/candle2.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Theme shrine/library allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "lshrineg",
+        "name": "Stone shrine left",
+        "source_path": "objects/lshrineg.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "Theme shrine allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "rshrineg",
+        "name": "Stone shrine right",
+        "source_path": "objects/rshrineg.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "Theme shrine allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "banner",
+        "name": "Skeleton-room banner",
+        "source_path": "objects/banner.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Theme skeleton room allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "cruxsk1",
+        "name": "Skeletal crucifix 1",
+        "source_path": "objects/cruxsk1.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Skeleton King DUN object layer"
+      },
+      {
+        "stem": "cruxsk2",
+        "name": "Skeletal crucifix 2",
+        "source_path": "objects/cruxsk2.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Skeleton King DUN object layer"
+      },
+      {
+        "stem": "cruxsk3",
+        "name": "Skeletal crucifix 3",
+        "source_path": "objects/cruxsk3.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Skeleton King DUN object layer"
+      }
+    ],
+    "CTC": [
+      {
+        "stem": "rockstan",
+        "name": "Magic Rock stand",
+        "source_path": "objects/rockstan.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "InitObjects: Catacombs Magic Rock quest, floor 5"
+      },
+      {
+        "stem": "pedistl",
+        "name": "Blood-quest pedestal",
+        "source_path": "objects/pedistl.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "InitObjects: Catacombs Valor quest, floor 5"
+      },
+      {
+        "stem": "book2",
+        "name": "Bone Chamber book",
+        "source_path": "objects/book2.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Bone Chamber DUN object layer"
+      },
+      {
+        "stem": "bcase",
+        "name": "Library bookcase",
+        "source_path": "objects/bcase.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Theme library allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "candle2",
+        "name": "Shrine/library candles",
+        "source_path": "objects/candle2.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "Theme library allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "lshrineg",
+        "name": "Stone shrine left",
+        "source_path": "objects/lshrineg.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "Theme shrine allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "rshrineg",
+        "name": "Stone shrine right",
+        "source_path": "objects/rshrineg.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "Theme shrine allowed in Cathedral/Catacombs"
+      },
+      {
+        "stem": "burncros",
+        "name": "Bone Chamber burning cross",
+        "source_path": "objects/burncros.cel",
+        "width": 160,
+        "frame": 0,
+        "association": "Bone Chamber DUN object layer"
+      }
+    ],
+    "CAV": [
+      {
+        "stem": "mushptch",
+        "name": "Black mushroom patch",
+        "source_path": "objects/mushptch.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "InitObjects: Black Mushroom cave quest"
+      },
+      {
+        "stem": "decap",
+        "name": "Slain adventurer",
+        "source_path": "objects/decap.cel",
+        "width": 96,
+        "frame": 1,
+        "association": "AllObjects: Slain Hero at cave floor 9; second frame"
+      },
+      {
+        "stem": "bkslbrnt",
+        "name": "Story book stand",
+        "source_path": "objects/bkslbrnt.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "InitObjects: AddStoryBooks on dungeon floor 12"
+      }
+    ],
+    "HEL": [
+      {
+        "stem": "cauldren",
+        "name": "Cauldron",
+        "source_path": "objects/cauldren.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "AddL4Goodies: Hell cauldrons"
+      },
+      {
+        "stem": "burncros",
+        "name": "Burning cross",
+        "source_path": "objects/burncros.cel",
+        "width": 160,
+        "frame": 0,
+        "association": "Burning-cross theme allowed in Hell"
+      },
+      {
+        "stem": "decap",
+        "name": "Decapitated remains",
+        "source_path": "objects/decap.cel",
+        "width": 96,
+        "frame": 0,
+        "association": "AddL4Goodies: Hell remains"
+      },
+      {
+        "stem": "tnudem",
+        "name": "Tortured remains 1",
+        "source_path": "objects/tnudem.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "AddL4Goodies: Hell male torture props"
+      },
+      {
+        "stem": "tnudem",
+        "name": "Tortured remains 2",
+        "source_path": "objects/tnudem.cel",
+        "width": 128,
+        "frame": 1,
+        "association": "AddL4Goodies: Hell male torture props"
+      },
+      {
+        "stem": "tnudem",
+        "name": "Tortured remains 3",
+        "source_path": "objects/tnudem.cel",
+        "width": 128,
+        "frame": 2,
+        "association": "AddL4Goodies: Hell male torture props"
+      },
+      {
+        "stem": "tnudem",
+        "name": "Tortured remains 4",
+        "source_path": "objects/tnudem.cel",
+        "width": 128,
+        "frame": 3,
+        "association": "AddL4Goodies: Hell male torture props"
+      },
+      {
+        "stem": "tnudew",
+        "name": "Torture stake 1",
+        "source_path": "objects/tnudew.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "AddL4Goodies: Hell female torture props"
+      },
+      {
+        "stem": "tnudew",
+        "name": "Torture stake 2",
+        "source_path": "objects/tnudew.cel",
+        "width": 128,
+        "frame": 1,
+        "association": "AddL4Goodies: Hell female torture props"
+      },
+      {
+        "stem": "tnudew",
+        "name": "Torture stake 3",
+        "source_path": "objects/tnudew.cel",
+        "width": 128,
+        "frame": 2,
+        "association": "AddL4Goodies: Hell female torture props"
+      },
+      {
+        "stem": "tsoul",
+        "name": "Hooked remains 1",
+        "source_path": "objects/tsoul.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "AddL4Goodies/AddHookedBodies: Hell"
+      },
+      {
+        "stem": "tsoul",
+        "name": "Hooked remains 2",
+        "source_path": "objects/tsoul.cel",
+        "width": 128,
+        "frame": 1,
+        "association": "AddL4Goodies/AddHookedBodies: Hell"
+      },
+      {
+        "stem": "tsoul",
+        "name": "Hooked remains 3",
+        "source_path": "objects/tsoul.cel",
+        "width": 128,
+        "frame": 2,
+        "association": "AddL4Goodies/AddHookedBodies: Hell"
+      },
+      {
+        "stem": "tsoul",
+        "name": "Hooked remains 4",
+        "source_path": "objects/tsoul.cel",
+        "width": 128,
+        "frame": 3,
+        "association": "AddL4Goodies/AddHookedBodies: Hell"
+      },
+      {
+        "stem": "tsoul",
+        "name": "Hooked remains 5",
+        "source_path": "objects/tsoul.cel",
+        "width": 128,
+        "frame": 4,
+        "association": "AddL4Goodies/AddHookedBodies: Hell"
+      },
+      {
+        "stem": "lzstand",
+        "name": "Lazarus quest stand",
+        "source_path": "objects/lzstand.cel",
+        "width": 128,
+        "frame": 0,
+        "association": "InitObjects: Hell Betrayer quest stand"
+      }
+    ],
+    "TWN": []
+  },
+  "shared": [
+    {
+      "stem": "barrel",
+      "name": "Barrel",
+      "source_path": "objects/barrel.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "InitRndBarrels in all four dungeon types"
+    },
+    {
+      "stem": "barrelex",
+      "name": "Explosive barrel",
+      "source_path": "objects/barrelex.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "InitRndBarrels in all four dungeon types"
+    },
+    {
+      "stem": "chest1",
+      "name": "Small chest",
+      "source_path": "objects/chest1.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "AllObjects: dungeon floors 1-16"
+    },
+    {
+      "stem": "chest2",
+      "name": "Chest",
+      "source_path": "objects/chest2.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "AllObjects: dungeon floors 1-16"
+    },
+    {
+      "stem": "chest3",
+      "name": "Large chest",
+      "source_path": "objects/chest3.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "AllObjects: dungeon floors 1-16"
+    },
+    {
+      "stem": "bloodfnt",
+      "name": "Blood fountain",
+      "source_path": "objects/bloodfnt.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "Blood-fountain theme allowed across dungeon types"
+    },
+    {
+      "stem": "pfountn",
+      "name": "Purifying fountain",
+      "source_path": "objects/pfountn.cel",
+      "width": 128,
+      "frame": 0,
+      "association": "Purifying-fountain theme allowed across dungeon types"
+    },
+    {
+      "stem": "mfountn",
+      "name": "Murky fountain",
+      "source_path": "objects/mfountn.cel",
+      "width": 128,
+      "frame": 0,
+      "association": "Murky-fountain theme allowed across dungeon types"
+    },
+    {
+      "stem": "tfountn",
+      "name": "Tear fountain",
+      "source_path": "objects/tfountn.cel",
+      "width": 128,
+      "frame": 0,
+      "association": "Tear-fountain theme allowed across dungeon types"
+    },
+    {
+      "stem": "goatshrn",
+      "name": "Goat shrine",
+      "source_path": "objects/goatshrn.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "Goat-shrine theme, subject to level monster availability"
+    },
+    {
+      "stem": "weapstnd",
+      "name": "Weapon rack",
+      "source_path": "objects/weapstnd.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "Weapon-rack theme allowed in Catacombs/Caves/Hell"
+    },
+    {
+      "stem": "armstand",
+      "name": "Armor stand",
+      "source_path": "objects/armstand.cel",
+      "width": 96,
+      "frame": 0,
+      "association": "Armor-stand theme allowed in Catacombs/Caves/Hell"
+    }
+  ],
+  "town_nature": [
+    {
+      "tile": 33,
+      "name": "Bare tree"
+    },
+    {
+      "tile": 40,
+      "name": "Branched tree"
+    },
+    {
+      "tile": 43,
+      "name": "Thin tree"
+    },
+    {
+      "tile": 46,
+      "name": "Small bare tree"
+    },
+    {
+      "tile": 54,
+      "name": "Large bare tree"
+    },
+    {
+      "tile": 95,
+      "name": "Leafy tree"
+    },
+    {
+      "tile": 59,
+      "name": "Small boulder"
+    },
+    {
+      "tile": 60,
+      "name": "Boulder"
+    },
+    {
+      "tile": 61,
+      "name": "Rock cluster"
+    },
+    {
+      "tile": 62,
+      "name": "Boulder cluster"
+    }
+  ],
+  "unverified_outdoor_categories": [
+    "standalone bushes",
+    "standalone shrubs",
+    "standalone flowers"
+  ]
+}

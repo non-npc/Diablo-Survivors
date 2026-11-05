@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "game_id": "original_demo",
+  "display_name": "The proving grounds",
+  "adapter_id": "original_demo",
+  "adapter_version": "0.1.0",
+  "catalog_id": "original-demo-v1",
+  "actors": [
+    {
+      "id": "hero",
+      "display_name": "Wayfarer",
+      "speed": 240,
+      "visual": "resources/hero.svg",
+      "provenance": "Original GameShift artwork"
+    }
+  ],
+  "arena": {
+    "width": 1136,
+    "height": 508
+  }
+}

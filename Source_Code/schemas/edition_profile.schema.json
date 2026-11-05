@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "edition_profile",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "edition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "game_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "distribution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "executable_product_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "catalog_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verification": {
+      "enum": [
+        "inspected",
+        "verified"
+      ]
+    },
+    "archives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?![\\\\/])(?![A-Za-z]:)(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "path",
+          "size_bytes",
+          "sha256"
+        ]
+      }
+    },
+    "patch_precedence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "edition_id",
+    "game_id",
+    "distribution",
+    "language",
+    "executable_product_version",
+    "catalog_id",
+    "verification",
+    "archives",
+    "patch_precedence",
+    "notes"
+  ]
+}

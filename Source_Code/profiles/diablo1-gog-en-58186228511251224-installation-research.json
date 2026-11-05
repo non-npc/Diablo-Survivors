@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "edition_id": "diablo1-gog-en-58186228511251224-installation-research",
+  "game_id": "diablo1",
+  "distribution": "GOG",
+  "language": "en-US",
+  "executable_product_version": "1.0.9.2",
+  "catalog_id": "diablo1-gog-en-58186228511251224-installation-research-catalog-v1",
+  "verification": "inspected",
+  "archives": [
+    {
+      "path": "DIABDAT.MPQ",
+      "size_bytes": 517501282,
+      "sha256": "63fb47d9c76484024c7640d90ab6b7ec5e13f567a7e1a917b6c03a6631d3f2b0",
+      "required": true
+    },
+    {
+      "path": "DRTL_IX86_108_109.mpq",
+      "size_bytes": 401981,
+      "sha256": "96b00887ac90cc8af5ffbadb4df23e2f09df1a20f414cef6186b8f4c60c0524b",
+      "required": true
+    },
+    {
+      "path": "Patch_rt.mpq",
+      "size_bytes": 593853,
+      "sha256": "9fd730cf71ee1402ba74001a343193d25b4c79e29a29051acada3bc756a9b169",
+      "required": true
+    },
+    {
+      "path": "dx/Patch_rt.mpq",
+      "size_bytes": 593853,
+      "sha256": "9fd730cf71ee1402ba74001a343193d25b4c79e29a29051acada3bc756a9b169",
+      "required": true
+    },
+    {
+      "path": "hellfire/hellfire.mpq",
+      "size_bytes": 65502336,
+      "sha256": "bbbd3e4b09db3c16d72e3f8503058dd09a8aaecccf486c3b6a0fca270cef9ba8",
+      "required": true
+    },
+    {
+      "path": "hellfire/hfmonk.mpq",
+      "size_bytes": 37658368,
+      "sha256": "5358fa2aa6c7bfdd3bfdd07b0457807d3220a60cfe8b1967a0938b433a9b33c5",
+      "required": true
+    },
+    {
+      "path": "hellfire/hfmusic.mpq",
+      "size_bytes": 34379360,
+      "sha256": "2d719ef13502bf3c68eb4771411391bd37bb420d753eb6239becb063c6918de1",
+      "required": true
+    },
+    {
+      "path": "hellfire/hfvoice.mpq",
+      "size_bytes": 37743520,
+      "sha256": "243fec5f04710ba316b9f61065a257e47c1404b13f63c52541ed4eb714267b72",
+      "required": true
+    }
+  ],
+  "patch_precedence": [],
+  "notes": "Inspected GOG English Diablo/Hellfire installation. Archive identities and filename catalog verified; content classification and limited previews available. Full animation mappings, palette translations, patch precedence and playable campaign remain unverified."
+}

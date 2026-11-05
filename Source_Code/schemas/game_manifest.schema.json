@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "game_manifest",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "game_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adapter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adapter_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "catalog_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "speed": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 1000
+          },
+          "visual": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?![\\\\/])(?![A-Za-z]:)(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+          },
+          "provenance": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "display_name",
+          "speed",
+          "visual",
+          "provenance"
+        ]
+      }
+    },
+    "arena": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "game_id",
+    "display_name",
+    "adapter_id",
+    "adapter_version",
+    "catalog_id",
+    "actors",
+    "arena"
+  ]
+}

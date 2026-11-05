@@ -1,0 +1,19 @@
+config_version=5
+
+[application]
+config/name="Diablo Survivors"
+config/version="0.23.0"
+config/display_version="0.23 beta"
+run/main_scene="res://scenes/survival.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/mode=2
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.04, 0.06, 0.09, 1)

@@ -1,0 +1,138 @@
+[
+  {
+    "id": "cathedral",
+    "title": "Cathedral — Floor 1",
+    "tileset": 1,
+    "floor": 1
+  },
+  {
+    "id": "tristram",
+    "title": "Tristram",
+    "tileset": 0
+  },
+  {
+    "id": "cathedral-2",
+    "title": "Cathedral — Floor 2",
+    "tileset": 1,
+    "floor": 2
+  },
+  {
+    "id": "cathedral-3",
+    "title": "Cathedral — Floor 3",
+    "tileset": 1,
+    "floor": 3
+  },
+  {
+    "id": "skeleton-king",
+    "title": "Skeleton King’s Lair",
+    "tileset": 1,
+    "quest_map": "levels/l1data/sklkng2.dun",
+    "palette": "levels/l1data/l1_2.pal"
+  },
+  {
+    "id": "cathedral-4",
+    "title": "Cathedral — Floor 4",
+    "tileset": 1,
+    "floor": 4
+  },
+  {
+    "id": "maze",
+    "title": "Maze",
+    "tileset": 1,
+    "quest_map": "levels/l1data/lv1mazeb.dun",
+    "palette": "levels/l1data/l1_5.pal"
+  },
+  {
+    "id": "catacombs-5",
+    "title": "Catacombs — Floor 5",
+    "tileset": 2,
+    "floor": 5
+  },
+  {
+    "id": "catacombs-6",
+    "title": "Catacombs — Floor 6",
+    "tileset": 2,
+    "floor": 6
+  },
+  {
+    "id": "bone-chamber",
+    "title": "Bone Chamber",
+    "tileset": 2,
+    "quest_map": "levels/l2data/bonecha1.dun",
+    "palette": "levels/l2data/l2_2.pal"
+  },
+  {
+    "id": "catacombs-7",
+    "title": "Catacombs — Floor 7",
+    "tileset": 2,
+    "floor": 7
+  },
+  {
+    "id": "catacombs-8",
+    "title": "Catacombs — Floor 8",
+    "tileset": 2,
+    "floor": 8
+  },
+  {
+    "id": "caves-9",
+    "title": "Caves — Floor 9",
+    "tileset": 3,
+    "floor": 9
+  },
+  {
+    "id": "poisoned-water",
+    "title": "Poisoned Water Supply",
+    "tileset": 3,
+    "quest_map": "levels/l3data/foulwatr.dun",
+    "palette": "levels/l3data/l3pfoul.pal"
+  },
+  {
+    "id": "caves-10",
+    "title": "Caves — Floor 10",
+    "tileset": 3,
+    "floor": 10
+  },
+  {
+    "id": "caves-11",
+    "title": "Caves — Floor 11",
+    "tileset": 3,
+    "floor": 11
+  },
+  {
+    "id": "caves-12",
+    "title": "Caves — Floor 12",
+    "tileset": 3,
+    "floor": 12
+  },
+  {
+    "id": "hell-13",
+    "title": "Hell — Floor 13",
+    "tileset": 4,
+    "floor": 13
+  },
+  {
+    "id": "hell-14",
+    "title": "Hell — Floor 14",
+    "tileset": 4,
+    "floor": 14
+  },
+  {
+    "id": "hell-15",
+    "title": "Hell — Floor 15",
+    "tileset": 4,
+    "floor": 15
+  },
+  {
+    "id": "lazarus",
+    "title": "Archbishop Lazarus’ Lair",
+    "tileset": 1,
+    "quest_map": "levels/l1data/vile2.dun",
+    "palette": "levels/l1data/l1_2.pal"
+  },
+  {
+    "id": "hell-16",
+    "title": "Hell — Floor 16",
+    "tileset": 4,
+    "floor": 16
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "origin": "Original artwork generated with built-in image_gen",
+  "prompt": "Create an ORIGINAL game-ready transparent PNG sprite sheet of a tiny greedy treasure goblin for an isometric dark fantasy survival game. Not an existing franchise character. Green skin, long ears, hunched body, patched burgundy hood and brown leather vest, oversized sack of gold on back, small gold glints. Hand-painted pixel-art aesthetic readable at small scale. EXACT uniform grid: 4 columns by 4 rows, 16 frames, square 1024x1024 canvas, each cell 256x256. No visible grid, labels, text, backgrounds, scenery or floor shadows. Each character entirely inside its own cell with generous transparent gutters, consistent scale and foot baseline at 220 pixels within cell. Four rows are running directions: row 1 facing DOWN toward viewer, row 2 LEFT, row 3 RIGHT, row 4 UP away from viewer. Each row four successive looping run-cycle frames, legs and sack visibly changing pose. Matching identity and proportions throughout. All background pixels transparent, preserve alpha. Use only one character per cell, precisely centered in each cell. Intended animation at 4 frames per direction.",
+  "layout": {
+    "columns": 4,
+    "rows": 4,
+    "directions": [
+      "south",
+      "west",
+      "east",
+      "north"
+    ],
+    "frames_per_direction": 4
+  },
+  "note": "Runtime uses fractional quarter-image rectangles; generated source retained unchanged."
+}

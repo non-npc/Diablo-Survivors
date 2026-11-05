@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "edition_id": "diablo2-classic-en-100-baseline",
+  "game_id": "diablo2",
+  "distribution": "Classic retail layout",
+  "language": "en",
+  "executable_product_version": "1.0.0.1",
+  "catalog_id": "diablo2-classic-assets-v1",
+  "verification": "verified",
+  "archives": [
+    {
+      "path": "d2data.mpq",
+      "size_bytes": 256225123,
+      "sha256": "bb3835a14aa3935b2204d32dca9e2409f51507a35679f889a97526240ce6f055",
+      "required": true
+    },
+    {
+      "path": "d2char.mpq",
+      "size_bytes": 263369609,
+      "sha256": "8b6a08d39f7262912f1e96e21417bc352c684ba4f6f3f4537e290da7f3b5a37d",
+      "required": true
+    },
+    {
+      "path": "d2sfx.mpq",
+      "size_bytes": 51948307,
+      "sha256": "9c0368c2148c45ddb66bb53ed0a6d58d2fc6c7e0abdcc1d3e84924a79cb88409",
+      "required": true
+    }
+  ],
+  "patch_precedence": [
+    "patch_d2.mpq",
+    "d2exp.mpq",
+    "d2char.mpq",
+    "d2data.mpq",
+    "d2sfx.mpq"
+  ],
+  "notes": "Original classic base MPQ layout inventoried against Game.exe product 1.0.0.1. Classic base-only import offers five playable class unlocks. Lord of Destruction uses the separately verified 1.07 expansion profile and seven classes. Patch/expansion archives override base assets. Resurrected and Infernal Edition are unsupported."
+}

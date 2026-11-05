@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "title",
+    "profile_id",
+    "player_visual",
+    "enemy_visual",
+    "configuration"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "player_visual": {
+      "type": "object",
+      "required": [
+        "clips"
+      ]
+    },
+    "enemy_visual": {
+      "type": "object",
+      "required": [
+        "clips"
+      ]
+    },
+    "terrain": {
+      "type": "object"
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "duration_seconds",
+        "seed",
+        "player",
+        "enemy",
+        "director",
+        "upgrades"
+      ]
+    },
+    "save_path": {
+      "type": "string"
+    },
+    "class_visuals": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/properties/player_visual"
+      }
+    },
+    "map": {
+      "type": "object"
+    },
+    "ui": {
+      "type": "object"
+    },
+    "cow_visual": {
+      "$ref": "#/properties/player_visual"
+    },
+    "audio": {
+      "type": "object"
+    },
+    "arenas": {
+      "type": "object"
+    },
+    "default_arena": {
+      "type": "string"
+    },
+    "enemy_visuals": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/properties/enemy_visual"
+      }
+    },
+    "impact_effects": {
+      "type": "object"
+    },
+    "game_id": {
+      "enum": [
+        "diablo1",
+        "diablo2"
+      ]
+    },
+    "source_game": {
+      "type": "object"
+    },
+    "available_classes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "default_class": {
+      "type": "string"
+    },
+    "class_names": {
+      "type": "object"
+    }
+  }
+}
