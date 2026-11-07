@@ -1,19 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [application]
+
 config/name="Diablo Survivors"
-config/version="0.23.0"
-config/display_version="0.23 beta"
+config/version="0.24.0"
 run/main_scene="res://scenes/survival.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+config/display_version="0.24 beta"
 
 [display]
+
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [rendering]
+
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.04, 0.06, 0.09, 1)

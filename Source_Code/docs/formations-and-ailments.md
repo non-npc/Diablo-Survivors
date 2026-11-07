@@ -1,0 +1,11 @@
+# Formation and ailment implementation
+
+`runtime/scripts/formations.gd` owns a separate seeded event schedule and bounded formation slots. The runtime already supplies a fresh seed for ordinary runs. It excludes stationary enemies, uniques and the area's named boss from the formation roster. Navigation retains normal obstacle collision and falls back to the existing player flow field when a slot is obstructed. Formation steering expires after 22 seconds; striking distance breaks membership sooner. Event capacity is rechecked after the warning. If fewer than the minimum slots are walkable and spaced apart, the whole event is skipped.
+
+Eight-minute runs schedule two events; longer normal runs schedule two or three. Minimum actual warning spacing is 90 seconds. No warnings begin in the final 45 seconds. Shape choices do not repeat within the scheduled run. Cow hunts and test runs shorter than three minutes do not schedule formations.
+
+`runtime/scripts/ailments.gd` supplies shared bounded durations, potency, movement and damage modifiers. The model applies it to successful player/enemy damage, accounts for ailment deaths through normal kill/reward handling, and advances timers only during gameplay. Scorched and Poisoned deal time-based damage; Chaos-afflicted accumulates 0.75-second pulses. Chilled multiplies movement by 0.75 and Shocked multiplies incoming damage by 1.15. There is no new elemental resistance system.
+
+New elemental touch upgrade ranks affect application chance (20% per tier, capped at 60%). Native fire attacks apply Scorched, and the prior generic damage-over-time upgrade applies Poisoned. Repeat applications refresh one entry per element and preserve the stronger potency; they do not multiply stacks. Damaging effects cap at 12 base DPS per element. Existing particle textures, sprite sheets and palette tints are reused; no additional proprietary assets are distributed.
+
+`runtime/tests/formations_ailments.gd` covers schedule bounds, repeatability, formation counts, breakup, shrinking, elite creation, capacity refusal, player/enemy application, refresh, expiry, slow/shock modifiers, chaos pulses, pause and ailment kill credit. `formation_status_capture.gd` provides a native-render preview. Run the full checks with `python scripts/check.py --godot PATH_TO_GODOT`.

@@ -8,6 +8,7 @@ func require(value:bool,message:String) -> void:
 func _initialize() -> void:call_deferred("check_modes")
 func check_modes() -> void:
     var base:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://resources/survival_demo.json")).configuration
+    base["formations_enabled"]=false # Isolate timer/progression checks from combat events.
     base.challenges=[{"id":"skeleton-20","title":"Defeat 20 skeletons","enemy":"skeleton","target":20},{"id":"boss-1","title":"Defeat 1 boss","enemy":"boss","target":1}];base["boss"]="boss"
     var progress:Dictionary=Classes.migrate({})
     require(Classes.difficulty_unlocked(progress,"cathedral","easy") and not Classes.difficulty_unlocked(progress,"cathedral","hard"),"Only first area's Easy starts unlocked")

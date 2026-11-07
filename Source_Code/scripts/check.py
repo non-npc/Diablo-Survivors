@@ -101,6 +101,8 @@ def main():
         if "GAMESHIFT_PROJECTILE_UPGRADES_OK" not in output:raise SystemExit("Projectile upgrades marker missing")
         output = run([binary,"--headless","--path",str(ROOT/"runtime"),"--script","res://tests/completion_rules.gd","--","--test-progress",str(Path(folder)/"completion/progress.json")],env)
         if "GAMESHIFT_COMPLETION_OK" not in output:raise SystemExit("Completion marker missing")
+        output = run([binary,"--headless","--path",str(ROOT/"runtime"),"--script","res://tests/formations_ailments.gd"],env)
+        assert "FORMATIONS_AILMENTS_OK" in output
         output = run([binary,"--headless","--path",str(ROOT/"runtime"),"--script","res://tests/magic_particles.gd"],env)
         assert "MAGIC_PARTICLES_OK" in output
         output = run([binary,"--headless","--path",str(ROOT/"runtime"),"--script","res://tests/caster_spell_rules.gd"],env)

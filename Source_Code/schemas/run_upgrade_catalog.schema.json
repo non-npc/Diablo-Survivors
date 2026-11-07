@@ -52,7 +52,12 @@
           "xp_multiplier",
           "boost_duration",
           "projectile_count",
-          "projectile_pierce"
+          "projectile_pierce",
+          "fire_power",
+          "poison_power",
+          "cold_power",
+          "lightning_power",
+          "chaos_power"
         ]
       },
       "step": {

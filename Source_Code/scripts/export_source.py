@@ -12,7 +12,7 @@ INTERNAL_DOCS = {"STATUS.md", "README-development-history.md"}
 PROHIBITED = {".pyc", ".pyo", ".import", ".mpq", ".cel", ".cl2", ".dcc", ".dc6", ".dt1", ".ds1", ".exe", ".dll", ".pck", ".ogg", ".wav", ".mp4", ".zip", ".rar"}
 
 def main():
-    target = ROOT / "Source_Code"
+    target = ROOT / "github_final" / "Source_Code"
     if target.exists():
         raise SystemExit("Source_Code already exists; move or rename it before exporting. Existing files were preserved.")
     paths = [ROOT / name for name in FILES]

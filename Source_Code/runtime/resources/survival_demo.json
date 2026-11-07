@@ -461,6 +461,56 @@
           "rogue",
           "sorcerer"
         ]
+      },
+      {
+        "id": "fire_touch",
+        "title": "Ember touch",
+        "stat": "fire_power",
+        "step": 1,
+        "mode": "add",
+        "description": "+20% chance per tier to inflict Scorched: short burning damage. Maximum 60%.",
+        "icon": 7,
+        "max_tier": 3
+      },
+      {
+        "id": "poison_touch",
+        "title": "Venom touch",
+        "stat": "poison_power",
+        "step": 1,
+        "mode": "add",
+        "description": "+20% chance per tier to inflict Poisoned: longer damage over time. Maximum 60%.",
+        "icon": 7,
+        "max_tier": 3
+      },
+      {
+        "id": "cold_touch",
+        "title": "Frost touch",
+        "stat": "cold_power",
+        "step": 1,
+        "mode": "add",
+        "description": "+20% chance per tier to inflict Chilled: 25% movement slow. Maximum 60%.",
+        "icon": 7,
+        "max_tier": 3
+      },
+      {
+        "id": "lightning_touch",
+        "title": "Storm touch",
+        "stat": "lightning_power",
+        "step": 1,
+        "mode": "add",
+        "description": "+20% chance per tier to inflict Shocked: 15% more damage received. Maximum 60%.",
+        "icon": 7,
+        "max_tier": 3
+      },
+      {
+        "id": "chaos_touch",
+        "title": "Chaos touch",
+        "stat": "chaos_power",
+        "step": 1,
+        "mode": "add",
+        "description": "+20% chance per tier to inflict Chaos-afflicted: pulsing dark damage. Maximum 60%.",
+        "icon": 7,
+        "max_tier": 3
       }
     ],
     "rare_events": {

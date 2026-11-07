@@ -1,4 +1,6 @@
 extends Node2D
+const Ailments=preload("res://scripts/ailments.gd")
+var ailment_hud:RichTextLabel
 var spell_light_layer:Node2D
 var particle_fx:Node2D
 var base_model: RefCounted
@@ -155,7 +157,7 @@ func _ready() -> void:
 	add_child(spell_light_layer)
 	for kind in ["haste","healing","magnet","vacuum"]:
 		pickup_icons[kind]=load_local_texture("res://resources/powerups/"+kind+".svg")
-	DisplayServer.window_set_title("Diablo Survivors v"+str(ProjectSettings.get_setting("application/config/display_version","0.23 beta")))
+	DisplayServer.window_set_title("Diablo Survivors v"+str(ProjectSettings.get_setting("application/config/display_version","0.24 beta")))
 	clean_window_title.call_deferred()
 	var args := OS.get_cmdline_user_args()
 	smoke = args.has("--smoke-test")
@@ -331,6 +333,7 @@ func panel_style() -> StyleBoxFlat:
 
 func build_ui() -> void:
 	var canvas := CanvasLayer.new();add_child(canvas)
+	ailment_hud=RichTextLabel.new();ailment_hud.position=Vector2(350,105);ailment_hud.size=Vector2(290,115);ailment_hud.bbcode_enabled=true;ailment_hud.mouse_filter=Control.MOUSE_FILTER_IGNORE;canvas.add_child(ailment_hud)
 	hud=Label.new();hud.position=Vector2(28,18);hud.add_theme_font_size_override("font_size",20);canvas.add_child(hud)
 	cow_timer=Label.new();cow_timer.position=Vector2(1050,20);cow_timer.size=Vector2(180,54);cow_timer.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;cow_timer.pivot_offset=Vector2(90,27);cow_timer.add_theme_font_size_override("font_size",36);cow_timer.add_theme_constant_override("outline_size",4);canvas.add_child(cow_timer)
 	build_speed_control(canvas)
@@ -524,7 +527,7 @@ func start_class(key: String) -> void:
 	restart()
 
 func upgrade_preview(upgrade:Dictionary) -> String:
-	var labels:Dictionary={"damage":"Damage","cooldown":"Attack interval","max_health":"Maximum HP","speed":"Movement speed","pickup_radius":"Pickup reach","projectile_count":"Projectiles per attack","projectile_pierce":"Enemies pierced","attack_count":"Attacks per cycle","area_scale":"Attack area multiplier","attack_targets":"Targets per attack","armor":"Armor","regeneration":"HP per second","crit_chance":"Critical chance","crit_multiplier":"Critical damage multiplier","knockback":"Knockback","kill_heal":"HP per kill","heal_drop_chance":"Healing-drop chance","xp_multiplier":"XP multiplier","summon_cap":"Allied minions","ally_damage":"Minion damage","ally_cooldown":"Minion attack interval","boost_duration":"Boost duration","dot_damage":"Damage per second","retaliation":"Retaliation damage","projectile_speed":"Projectile speed","splash_ratio":"Splash damage multiplier"}
+	var labels:Dictionary={"fire_power":"Scorch chance tier","poison_power":"Poison chance tier","cold_power":"Chill chance tier","lightning_power":"Shock chance tier","chaos_power":"Chaos chance tier","damage":"Damage","cooldown":"Attack interval","max_health":"Maximum HP","speed":"Movement speed","pickup_radius":"Pickup reach","projectile_count":"Projectiles per attack","projectile_pierce":"Enemies pierced","attack_count":"Attacks per cycle","area_scale":"Attack area multiplier","attack_targets":"Targets per attack","armor":"Armor","regeneration":"HP per second","crit_chance":"Critical chance","crit_multiplier":"Critical damage multiplier","knockback":"Knockback","kill_heal":"HP per kill","heal_drop_chance":"Healing-drop chance","xp_multiplier":"XP multiplier","summon_cap":"Allied minions","ally_damage":"Minion damage","ally_cooldown":"Minion attack interval","boost_duration":"Boost duration","dot_damage":"Damage per second","retaliation":"Retaliation damage","projectile_speed":"Projectile speed","splash_ratio":"Splash damage multiplier"}
 	var old:float=model.stats.get(upgrade.stat,0)
 	var next:float=model.tier_value(upgrade,upgrade.tier)
 	if upgrade.stat in ["projectile_count","projectile_pierce","attack_count","attack_targets","summon_cap","armor","max_health"]:return "%s: %d → %d" % [labels[upgrade.stat],int(old),int(next)]
@@ -903,6 +906,12 @@ func choose(index: int) -> void:
 	model.choose_upgrade(index);update_ui()
 
 func update_ui() -> void:
+	if ailment_hud!=null and model!=null:
+		ailment_hud.text=""
+		for element in model.player_conditions.ailments:
+			var effect:Dictionary=model.player_conditions.ailments[element]
+			ailment_hud.text+="[color=#%s]● %s  %.1fs[/color]\n" % [Ailments.COLORS[element].to_html(false),Ailments.NAMES[element],effect.remaining]
+		ailment_hud.visible=model.state in ["playing","paused","upgrade","character"]
 	var remaining:int=maxi(0,int(ceil(float(model.config.duration_seconds)-model.elapsed)))
 	hud.text="%s — %s (%s)\nHP %d / %d   •   Level %d   •   Wave %d\n%d kills" % [manifest.get("title","Survival"),class_title(selected_class),Difficulties.title(str(model.config.get("difficulty","easy"))),int(model.health),int(model.stats.max_health),model.level,model.wave,model.kills]
 	if not cow_event():
@@ -1124,7 +1133,7 @@ func update_attack_facing(movement:Vector2) -> void:
 
 func clean_window_title() -> void:
 	await get_tree().process_frame
-	DisplayServer.window_set_title("Diablo Survivors v"+str(ProjectSettings.get_setting("application/config/display_version","0.23 beta")))
+	DisplayServer.window_set_title("Diablo Survivors v"+str(ProjectSettings.get_setting("application/config/display_version","0.24 beta")))
 
 func health_bar_color(ratio:float) -> Color:
 	if ratio<=0.15:return Color("ef4e4e")
@@ -1241,6 +1250,8 @@ func simulation_step(delta:float,refresh:bool=true) -> void:
 				attack_animation_span=minf(0.56,model.attack_interval()-walk_step-0.05)
 				attack_animation=attack_animation_span;attack_ready_flash=0.25;player_age=0
 				swings.append({"position":event.position,"direction":event.direction,"age":0.0})
+			elif event.kind=="formation_warning":
+				event_notice="Incoming %s formation%s" % [event.shape," — elite arrival marked!" if event.elite else "!"];notice_clock=3
 			elif event.kind in ["goblin_spawn","treasure","portal"]:
 				event_notice={"goblin_spawn":"A treasure goblin appeared!","treasure":"Treasure dropped: collect its XP and gold!","portal":"A rare cow portal opened! Approach and press E."}[event.kind];notice_clock=6
 			elif event.kind=="powerup":
@@ -1434,6 +1445,31 @@ func draw_spell_sprite(kind:String,point:Vector2,direction:int,age:float,opacity
 	if rotated:painter.draw_set_transform(Vector2.ZERO)
 	return true
 
+func ailment_tint(target:Dictionary) -> Color:
+	var effects:Dictionary=target.get("ailments",{})
+	if effects.is_empty():return Color.WHITE
+	return Color.WHITE.lerp(Ailments.COLORS[effects.keys()[0]],0.28)
+
+func draw_formation_warning() -> void:
+	var warning:Dictionary=model.formation_director.pending
+	if warning.is_empty():return
+	var center:Vector2=screen(model.nearest_position(warning.center,model.player))
+	var color:=Color(1,0.65,0.3,0.25+0.15*sin(model.elapsed*7))
+	if warning.shape in ["circle","square","diamond"]:
+		var radius:float=300+float(warning.count-12)*9
+		if warning.shape=="circle":draw_arc(center,radius,warning.angle+0.35,warning.angle+TAU-0.35,48,color,2,true)
+		else:
+			var points:=PackedVector2Array()
+			for i in range(5):points.append(center+Vector2.from_angle(PI/4+TAU*float(i)/4+(PI/4 if warning.shape=="diamond" else 0))*radius*1.414)
+			draw_polyline(points,color,2,true)
+	else:
+		var incoming:Vector2=center+Vector2(0,-280).rotated(warning.angle)
+		draw_arc(incoming,25,0,TAU,20,color,3,true)
+	if warning.elite:
+		draw_arc(center,36,0,TAU,24,Color(1,0.25,0.2,0.8),3,true)
+		draw_line(center-Vector2(12,0),center+Vector2(12,0),color,2)
+		draw_line(center-Vector2(0,12),center+Vector2(0,12),color,2)
+
 func draw_spell_lights() -> void:
 	if model==null:return
 	for shot in model.projectiles:
@@ -1516,6 +1552,7 @@ func _draw() -> void:
 	if spell_light_layer!=null:spell_light_layer.queue_redraw()
 	if model==null:return
 	draw_floor()
+	draw_formation_warning()
 	for patch in model.fire_patches:
 		draw_spell_sprite("firestorm",screen(patch.position),0,patch.age,clampf((float(patch.lifetime)-float(patch.age))/0.17,0,1))
 	for corpse in model.corpses:
@@ -1544,17 +1581,21 @@ func _draw() -> void:
 		elif item.kind=="impact":draw_impact_effect(item.data)
 		elif item.kind=="player":
 			draw_circle(screen(model.player),12,Color(0.35,0.9,0.8,0.14))
-			draw_actor("player",player_state,model.player,facing,player_age,Color("ffb3b3") if model.invulnerability>0 else Color.WHITE,1.0,player_walk_reverse)
+			draw_actor("player",player_state,model.player,facing,player_age,Color("ffb3b3") if model.invulnerability>0 else ailment_tint(model.player_conditions),1.0,player_walk_reverse)
+			if model.player_conditions.ailments.has("fire"):
+				for patch in range(4):
+					var spot:Vector2=screen(model.player)+Vector2(sin(float(patch)*2.7+model.elapsed)*8,-15-float(patch)*9)
+					draw_circle(spot,2.2,Color(1,0.18,0.04,0.7))
 		else:
 			var enemy:Dictionary=item.data
 			var position:=screen(enemy.position)
 			if position.x < -160 or position.x > 1440 or position.y < -160 or position.y > 880:continue
 			var hit_strength:float=clampf(float(enemy.hit)/0.16,0,1)
 			var draw_position:Vector2=enemy.position+Vector2(sin((0.16-float(enemy.hit))*110)*3.0,cos((0.16-float(enemy.hit))*90)*1.5)*hit_strength
-			var tint:Color=Color("ff6464") if enemy.hit>0 else Color("ffdc89") if enemy.elite else Color.WHITE
+			var tint:Color=Color("ff6464") if enemy.hit>0 else Ailments.COLORS.get(enemy.get("element",""),Color("ffdc89") if enemy.elite else ailment_tint(enemy))
 			if enemy.get("kind","")=="goblin":draw_goblin(draw_position,enemy.facing,enemy.age,tint);continue
 			if enemy.get("kind","")=="cow":draw_cow(draw_position,enemy.facing,enemy.age,tint);continue
-			draw_actor(enemy.get("kind","enemy") if visuals.has(enemy.get("kind","")) else "enemy","hit" if enemy.hit>0 else "attack" if enemy.get("attack_age",0)>0 else "walk",draw_position,enemy.facing,0.35-float(enemy.attack_age) if enemy.get("attack_age",0)>0 else enemy.age,tint,1.3 if enemy.elite else 1.0)
+			draw_actor(enemy.get("kind","enemy") if visuals.has(enemy.get("kind","")) else "enemy","hit" if enemy.hit>0 else "attack" if enemy.get("attack_age",0)>0 else "walk",draw_position,enemy.facing,0.35-float(enemy.attack_age) if enemy.get("attack_age",0)>0 else enemy.age,tint,1.6 if enemy.get("miniboss",false) else 1.3 if enemy.elite else 1.0)
 	while scenery_index<scenery.size():
 		draw_town_piece(scenery[scenery_index],true);scenery_index+=1
 	if not model.portal.is_empty():

@@ -1,6 +1,6 @@
 # Diablo Survivors
 
-**v0.23 beta · Windows 10 64-bit**
+**v0.24 beta · Windows 10 64-bit**
 
 ![Diablo I](https://img.shields.io/badge/Diablo_I-GOG_1.0.9.2-8b2525?style=flat-square)
 ![Diablo II Classic](https://img.shields.io/badge/Diablo_II-Classic-8b2525?style=flat-square)
@@ -29,17 +29,24 @@ Diablo Survivors is a survival action game inspired by Vampire Survivors, using 
 
 ## Download Latest Version
 
-Download both parts of **v0.23 beta** into the same folder:
+Download both parts of **v0.24 beta** into the same folder:
 
-- [Part 1 (EXE)](Diablo_Survivors_v0.23_beta_Windows_x64_Setup.part1.exe)
-- [Part 2 (RAR)](Diablo_Survivors_v0.23_beta_Windows_x64_Setup.part2.rar)
+- [Part 1 (EXE)](Diablo_Survivors_v0.24_beta_Windows_x64_Setup.part1.exe)
+- [Part 2 (RAR)](Diablo_Survivors_v0.24_beta_Windows_x64_Setup.part2.rar)
 
-Run **Diablo_Survivors_v0.23_beta_Windows_x64_Setup.part1.exe** and choose an extraction folder. The second part is read automatically; WinRAR is not required. After extraction, open the **Diablo Survivors** folder and run **Diablo Survivors.exe** when ready. The extractor does not launch the game. Keep the complete game folder together in a writable location.
+Run **Diablo_Survivors_v0.24_beta_Windows_x64_Setup.part1.exe** and choose an extraction folder. The second part is read automatically; WinRAR is not required. After extraction, open the **Diablo Survivors** folder and run **Diablo Survivors.exe** when ready. The extractor does not launch the game. Keep the complete game folder together in a writable location.
 
 **First-time setup can take a few minutes** while the game imports your selected installation's assets and builds its local asset cache. Let the import finish; subsequent launches reuse the cache.
 
 Please note that updates may require re-building the asset cache.
 
+
+## What's new in v0.24 beta
+
+- **Formation surprises:** two events in eight-minute runs, two or three in longer runs, with lines, pincers, V formations and shrinking circles/squares/diamonds. Enemy counts vary, groups avoid scenery and break apart at striking distance. Existing flying enemies can participate when available in the level.
+- **Occasional formation elite:** a larger local enemy can appear at the marked center, at most once per run, with extra XP.
+- **Elemental variants and ailments:** fire, poison, cold, lightning and chaos affect both players and enemies. Player ailments show colored timers and character effects; Scorched adds red embers and drifting smoke.
+- **Elemental touch upgrades:** add ailment chances to any class. Existing sprites and particle textures are reused.
 
 ## What's new in v0.23 beta
 

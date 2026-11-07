@@ -1,4 +1,8 @@
 extends RefCounted
+const Ailments=preload("res://scripts/ailments.gd")
+const Formations=preload("res://scripts/formations.gd")
+var formation_director:RefCounted
+var player_conditions:Dictionary={"ailments":{}}
 # Independent, seeded gameplay model. Rendering and source-game assets are external.
 var portal: Dictionary={}
 var kill_counts: Dictionary={}
@@ -111,6 +115,7 @@ func align_world() -> void:
 
 func _init(configuration: Dictionary) -> void:
     config = configuration.duplicate(true)
+    formation_director=Formations.new(config)
     var chamber_boss:String=config.get("boss","")
     var ordinary:Array=config.get("enemy_roster",[]).filter(func(kind):return kind!=chamber_boss and not config.get("enemy_definitions",{}).get(kind,{}).get("unique",false))
     config["boss_endurance"]=config.has("enemy_roster") and not chamber_boss.is_empty() and ordinary.is_empty()
@@ -121,6 +126,8 @@ func _init(configuration: Dictionary) -> void:
     var defaults:Dictionary={"boost_duration":1.0,"attack_count":1,"area_scale":1.0,"armor":0.0,"regeneration":0.0,"crit_chance":0.05,"crit_multiplier":1.5,"knockback":24.0,"kill_heal":0.0,"heal_drop_chance":0.06,"xp_multiplier":1.0,"ally_damage":14.0,"ally_cooldown":0.7,"dot_damage":0.0,"retaliation":0.0,"projectile_speed":620.0 if config.get("weapon","")=="bow" else 430.0,"splash_ratio":0.6}
     for key in defaults:
         if not stats.has(key):stats[key]=defaults[key]
+    for element in Ailments.COLORS:
+        if not stats.has(element+"_power"):stats[element+"_power"]=0.0
     base_stats=stats.duplicate(true)
     stats["projectile_count"]=1;stats["projectile_pierce"]=0
     base_stats["projectile_count"]=1;base_stats["projectile_pierce"]=0
@@ -197,6 +204,9 @@ func spawn_at(position: Vector2, hitpoints: float, elite: bool = false, kind:Str
     enemies.append({"id":next_id,"position":position,"health":hitpoints,"speed":float(config.enemy.speed)+wave*2,"damage":float(config.enemy.contact_damage)*(2 if elite else 1),"facing":0,"age":0.0,"hit":0.0,"elite":elite,"reward":5 if elite else 1,"radius":22.0 if elite else 16.0})
     var enemy:Dictionary=enemies.back()
     enemy["kind"]=kind;enemy["attack_age"]=0.0
+    enemy["ailments"]={};enemy["element"]=""
+    if elapsed>65 and config.get("mode","")!="cow" and formation_director.rng.randf()<0.045:
+        enemy.element=Ailments.COLORS.keys()[formation_director.rng.randi_range(0,4)]
     var definition:Dictionary=config.get("enemy_definitions",{}).get(kind,{})
     enemy["ranged"]=definition.get("ranged",false);enemy["missile"]=definition.get("missile","spell");enemy["shot_clock"]=rng.randf_range(1,2)
     if definition.get("stationary",false):enemy.speed=0
@@ -244,21 +254,27 @@ func spawn_directed(kind_override:String="") -> void:
 func direction_index(direction: Vector2) -> int:
     return (int(round((direction.angle()-PI/2)/(PI/4)))+8)%8
 
-func damage_enemy(enemy: Dictionary, amount: float, source: Vector2, effects:bool=true) -> void:
+func damage_enemy(enemy: Dictionary, amount: float, source: Vector2, effects:bool=true,element:String="") -> void:
     if enemy.health <= 0: return
     var critical:=false
     if effects:
         amount=maxf(1.0,roundf(amount*rng.randf_range(0.85,1.15)))
         critical=rng.randf()<clampf(float(stats.crit_chance),0.0,1.0)
         if critical:amount=roundf(amount*float(stats.crit_multiplier))
+    amount*=Ailments.vulnerability(enemy)
     enemy.health -= amount
+    if enemy.health>0:
+        if not element.is_empty():Ailments.apply(enemy,element,amount*0.12)
+        if effects:
+            for affinity in Ailments.COLORS:
+                if float(stats.get(affinity+"_power",0))>0 and rng.randf()<minf(0.6,float(stats[affinity+"_power"])*0.2):
+                    Ailments.apply(enemy,affinity,amount*0.12)
     enemy.hit = 0.16
     var push: Vector2 = enemy.position-source
     if effects:
         enemy.position=navigation.move(enemy.position,push.normalized()*float(stats.knockback)) if navigation!=null else enemy.position+push.normalized()*float(stats.knockback)
         if float(stats.dot_damage)>0:
-            if float(enemy.get("dot_remaining",0))<=0:enemy["dot_clock"]=0.5
-            enemy["dot_remaining"]=3.0;enemy["dot_dps"]=float(stats.dot_damage)
+            Ailments.apply(enemy,"poison",float(stats.dot_damage))
     total_damage += amount
     events.append({"kind":"damage","actor":enemy.get("kind","skeleton"),"fatal":enemy.health<=0,"position":enemy.position,"amount":amount,"critical":critical,"impact":effects})
     if enemy.health <= 0:
@@ -426,8 +442,14 @@ func tick(delta: float, movement: Vector2) -> void:
     if config.get("mode","")!="cow":
         wave=int(plan.index)+1
         if surge_index!=int(plan.index):surge_index=int(plan.index);surge_spawned=0
+    formation_director.tick(self,delta)
+    var ailment_damage:float=Ailments.tick(player_conditions,delta)
+    if ailment_damage>0:
+        health=maxf(0,health-ailment_damage*Ailments.vulnerability(player_conditions))
+        if health<=0:
+            state="dead";events.append({"kind":"player_death","position":player});return
     update_powerups(delta)
-    var displacement:=movement.limit_length()*float(stats.speed)*(1.35 if haste_clock>0 else 1.0)*delta
+    var displacement:=movement.limit_length()*float(stats.speed)*Ailments.speed(player_conditions)*(1.35 if haste_clock>0 else 1.0)*delta
     player=navigation.move(player,displacement) if navigation!=null else player+displacement
     var unwrapped_player:Vector2=player
     player=wrap_position(player)
@@ -476,6 +498,10 @@ func tick(delta: float, movement: Vector2) -> void:
         crowd_bins[bin].append({"id":member.id,"position":member.position,"radius":member.radius})
     for enemy in enemies:
         if enemy.health<=0:continue
+        var status_damage:float=Ailments.tick(enemy,delta)
+        if status_damage>0:
+            damage_enemy(enemy,status_damage,enemy.position,false)
+            if enemy.health<=0:continue
         if float(enemy.get("dot_remaining",0))>0:
             enemy.dot_remaining=maxf(0,float(enemy.dot_remaining)-delta)
             enemy.dot_clock=float(enemy.dot_clock)-delta
@@ -485,7 +511,11 @@ func tick(delta: float, movement: Vector2) -> void:
         if enemy.get("kind","")=="goblin":
             update_goblin(enemy,delta);continue
         var direction: Vector2 = player-enemy.position
-        var travel:Vector2=(navigation.pursuit(enemy.position,player,enemy) if navigation!=null else direction.normalized())*float(enemy.speed)*delta
+        var destination:Vector2=formation_director.target(self,enemy)
+        var heading:Vector2=(destination-enemy.position).normalized()
+        if navigation!=null and (not enemy.has("formation_id") or not navigation.clear_walk(enemy.position,destination)):
+            heading=navigation.pursuit(enemy.position,player,enemy)
+        var travel:Vector2=heading*float(enemy.speed)*Ailments.speed(enemy)*delta
         travel=crowd_heading(enemy,travel,crowd_bins)*travel.length()
         enemy.shot_clock=float(enemy.get("shot_clock",0))-delta
         var in_range:bool=enemy.get("ranged",false) and direction.length()<=float(enemy.ranged_max)
@@ -496,7 +526,7 @@ func tick(delta: float, movement: Vector2) -> void:
         if firing:
             travel=Vector2.ZERO
             if enemy.shot_clock<=0 and enemy_projectiles.size()<96:
-                enemy_projectiles.append({"position":enemy.position,"velocity":direction.normalized()*float(enemy.projectile_speed),"damage":float(enemy.damage),"age":0.0,"distance_travelled":0.0,"max_distance":float(enemy.ranged_max),"missile":enemy.missile})
+                enemy_projectiles.append({"position":enemy.position,"velocity":direction.normalized()*float(enemy.projectile_speed),"damage":float(enemy.damage),"age":0.0,"distance_travelled":0.0,"max_distance":float(enemy.ranged_max),"missile":enemy.missile,"element":enemy.get("element","") if not str(enemy.get("element","")).is_empty() else {"fire":"fire","firebolt":"fire","fireball":"fire","acid":"poison","poison":"poison","ice":"cold","lightning":"lightning"}.get(str(enemy.missile),"")})
                 enemy.shot_clock=float(enemy.shot_interval);enemy["attack_age"]=0.35
                 events.append({"kind":"enemy_attack","actor":enemy.kind,"position":enemy.position})
         if float(enemy.get("attack_age",0))>0:travel=Vector2.ZERO
@@ -537,14 +567,14 @@ func tick(delta: float, movement: Vector2) -> void:
             var struck:Dictionary=collision.enemy
             if shot.weapon=="firebolt" and shot.get("spell","")!="bonespear":events.append({"kind":"firebolt_impact","position":struck.position})
             var impact:Vector2=struck.position
-            damage_enemy(struck,shot.damage,start)
+            damage_enemy(struck,shot.damage,start,true,"fire" if shot.get("spell","")=="firebolt" else "")
             shot.hit_ids.append(struck.id);shot.remaining-=1
             if shot.weapon=="firebolt" and shot.get("spell","")!="bonespear":
                 var targets:=1
                 for enemy in enemies:
                     if targets>=int(stats.attack_targets):break
                     if enemy!=struck and enemy.health>0 and enemy.position.distance_to(impact)<float(stats.get("splash_radius",65))*float(stats.area_scale) and (navigation==null or navigation.clear_attack(impact,enemy.position)):
-                        damage_enemy(enemy,shot.damage*float(stats.splash_ratio),impact)
+                        damage_enemy(enemy,shot.damage*float(stats.splash_ratio),impact,true,"fire")
                         targets+=1
                         if targets>=int(stats.attack_targets):break
             if shot.remaining<=0:spent=true;break
@@ -558,7 +588,7 @@ func tick(delta: float, movement: Vector2) -> void:
             if enemy.health<=0 or enemy.firestorm_clock>0:continue
             for patch in fire_patches:
                 if enemy.position.distance_to(patch.position)<=float(enemy.radius)+float(patch.radius) and (navigation==null or navigation.clear_attack(patch.position,enemy.position)):
-                    damage_enemy(enemy,float(patch.damage),patch.position,false)
+                    damage_enemy(enemy,float(patch.damage),patch.position,false,"fire")
                     enemy.firestorm_clock=0.25;break
     for i in range(enemy_projectiles.size()-1,-1,-1):
         var shot:Dictionary=enemy_projectiles[i];var start:Vector2=shot.position
@@ -572,7 +602,8 @@ func tick(delta: float, movement: Vector2) -> void:
             enemy_projectiles.remove_at(i)
             if invulnerability<=0:
                 var received:=maxf(1,float(shot.damage)-float(stats.armor))
-                health-=received;invulnerability=0.7
+                health-=received*Ailments.vulnerability(player_conditions);invulnerability=0.7
+                Ailments.apply(player_conditions,str(shot.get("element","")),received*0.12)
                 events.append({"kind":"player_hit","position":player,"amount":received})
                 if health<=0:
                     events.append({"kind":"player_death","position":player});health=0;state="dead";return
@@ -582,7 +613,8 @@ func tick(delta: float, movement: Vector2) -> void:
         if enemy.get("kind","")=="goblin":continue
         if enemy.health>0 and player.distance_to(enemy.position)<float(enemy.radius)+12 and invulnerability<=0 and (navigation==null or navigation.clear_attack(enemy.position,player)):
             var received:=maxf(1,float(enemy.damage)-float(stats.get("armor",0)))
-            health-=received;invulnerability=0.7
+            health-=received*Ailments.vulnerability(player_conditions);invulnerability=0.7
+            Ailments.apply(player_conditions,str(enemy.get("element","")),received*0.12)
             if float(stats.retaliation)>0:
                 for nearby in enemies:
                     if nearby.health>0 and nearby.position.distance_to(player)<90 and (navigation==null or navigation.clear_attack(player,nearby.position)):damage_enemy(nearby,float(stats.retaliation),player,false)

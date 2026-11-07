@@ -2,6 +2,8 @@ extends Node2D
 # Small CPU particle pools also work with Godot's compatibility renderer.
 var pickups:Array[CPUParticles2D]=[]
 var mist:CPUParticles2D
+var afflictions:Array[CPUParticles2D]=[]
+var smoke:CPUParticles2D
 var spells:Array[CPUParticles2D]=[]
 var player_spells:Array[CPUParticles2D]=[]
 var ground_flames:Array[CPUParticles2D]=[]
@@ -158,6 +160,29 @@ func sync_player_spells(scene:Node2D,gameplay:bool,running:bool) -> void:
         particles.position=point;set_active(particles,true,running);used+=1
     for index in range(used,ground_flames.size()):set_active(ground_flames[index],false,running)
 
+func sync_ailments(scene:Node2D,gameplay:bool,running:bool) -> void:
+    var targets:Array=[{"position":scene.model.player,"effects":scene.model.player_conditions.ailments}]
+    for enemy in scene.model.enemies:
+        if not enemy.get("ailments",{}).is_empty():targets.append({"position":enemy.position,"effects":enemy.ailments})
+        if targets.size()>=17:break
+    var used:=0
+    for target in targets:
+        if not gameplay:break
+        for element in target.effects:
+            if used>=24:break
+            if afflictions.size()<=used:
+                var particles:=spell_emitter();particles.amount=8;particles.lifetime=0.7;particles.emission_shape=CPUParticles2D.EMISSION_SHAPE_SPHERE;particles.emission_sphere_radius=10
+                particles.direction=Vector2.UP;particles.spread=40;particles.initial_velocity_min=8;particles.initial_velocity_max=20;particles.scale_amount_min=0.07;particles.scale_amount_max=0.17
+                afflictions.append(particles)
+            var particles:=afflictions[used];particles.position=scene.screen(target.position)+Vector2(0,-22);particles.color=scene.Ailments.COLORS[element]
+            set_active(particles,true,running);used+=1
+    for index in range(used,afflictions.size()):set_active(afflictions[index],false,running)
+    if smoke==null:
+        smoke=spell_emitter();smoke.amount=12;smoke.lifetime=1.0;smoke.preprocess=1.0;smoke.material=null;smoke.direction=Vector2.UP;smoke.spread=20;smoke.initial_velocity_min=12;smoke.initial_velocity_max=23
+        smoke.scale_amount_min=0.25;smoke.scale_amount_max=0.5;smoke.color=Color(0.35,0.3,0.28,0.5)
+    smoke.position=scene.screen(scene.model.player)+Vector2(0,-25)
+    set_active(smoke,gameplay and scene.model.player_conditions.ailments.has("fire"),running)
+
 func soft_texture() -> GradientTexture2D:
     var gradient:=Gradient.new()
     gradient.offsets=PackedFloat32Array([0,0.35,1])
@@ -206,6 +231,7 @@ func sync(scene:Node2D) -> void:
     if mist==null:mist=emitter(true)
     var gameplay:bool=scene.model.state in ["playing","paused","upgrade","character"]
     var running:bool=scene.model.state=="playing"
+    sync_ailments(scene,gameplay,running)
     sync_spells(scene,gameplay,running)
     sync_player_spells(scene,gameplay,running)
     sync_goblins(scene,gameplay,running)

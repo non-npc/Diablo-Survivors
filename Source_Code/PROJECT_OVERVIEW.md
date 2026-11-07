@@ -6,7 +6,7 @@ The current development build runs on Windows using Python, PyQt6, SQLite, Pillo
 
 **Diablo II compatibility:** Diablo II and Diablo II: Lord of Destruction work with the original CD versions. Battle.net versions have not been tested.
 
-**v0.23 beta:** default player and enemy ranged attack distances are halved, and projectiles stop at their attack-distance limit. Long reach now increases both targeting and projectile travel by 10% per tier. Firebolt, Bone Spear and Firestorm retain their original imported spell sprites.
+**v0.24 beta:** rare enemy formations, occasional enlarged formation elites, elemental enemy variants, and shared player/enemy status ailments. Existing spell sprites and particle textures are reused.
 
 ## Start the app
 
@@ -200,4 +200,27 @@ D2 now uses its own original area names and Acts. D1 retains 95 enemy profiles a
 
 ## Source code and contributions
 
-A clean, independently buildable source snapshot is available in [Source_Code](Source_Code/readme.md), including Windows client build instructions. Bug fixes and improvements are welcome through pull requests; see [CONTRIBUTING.md](CONTRIBUTING.md). Project-owned code is licensed under [MIT](LICENSE). Dependencies retain their own terms, including PyQt6's GPL/commercial licensing; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+A clean, independently buildable source snapshot is available in [Source_Code](readme.md), including Windows client build instructions. Bug fixes and improvements are welcome through pull requests; see [CONTRIBUTING.md](CONTRIBUTING.md). Project-owned code is licensed under [MIT](LICENSE). Dependencies retain their own terms, including PyQt6's GPL/commercial licensing; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+
+## Formation surprises and elemental ailments
+
+Normal eight-minute runs schedule two formation events; longer normal runs schedule two or three. Their timing, shape, roster enemy and size vary between runs. Events leave the opening minute clear, are at least 90 seconds apart, and do not begin in the final 45 seconds. Cow hunts keep their existing rules. A crowded or obstructed arena can prevent an event from spawning rather than exceed the enemy cap or create a partial formation.
+
+Lines, pincers and V formations use 8–12 enemies. Shrinking circles, squares and diamonds use 12–18, with larger groups starting farther out and an escape sector left open. A 2.5-second warning marks the approach. Encirclements are centered on the player's position at the warning, so moving out is possible. Enemies avoid scenery, may loosen their spacing around obstacles, and break formation individually at striking distance. They remain in combat afterward. Flying enemies can form groups when the current level's roster supplies suitable flying sprites; they also respect obstacles.
+
+A shrinking formation can occasionally include a larger version of a local enemy at its marked center. At most one such elite is allowed per run, and many runs have none. It uses existing attacks, increased health and size, and awards extra XP. The center arrival is marked during the warning.
+
+Rare elemental variants use consistent tints and apply an ailment through damaging hits:
+
+| Element / tint | Ailment | Effect |
+| --- | --- | --- |
+| Fire / orange-red | Scorched | 3 seconds of burning damage |
+| Poison / green | Poisoned | 5 seconds of damage over time |
+| Cold / pale blue | Chilled | 25% movement slow for 2.5 seconds |
+| Lightning / yellow-white | Shocked | 15% increased damage received for 2 seconds |
+| Chaos / purple | Chaos-afflicted | Damage pulses every 0.75 seconds for 3 seconds |
+
+These rules apply to players and enemies. Firebolt and Firestorm inflict Scorched; the existing damage-over-time upgrade now inflicts Poisoned. Five new elemental touch upgrades give any class a 20% application chance per tier, up to 60%. Reapplication refreshes duration and keeps the strongest potency rather than adding stacks. Each damaging ailment is capped at 12 base damage per second. Ailment kills count toward normal rewards. Ailments pause with gameplay and reset for a new run.
+
+Player ailments show their names, colors and remaining times beside the health bar, with matching tint/particles on the character. Scorched adds small red ember patches and drifting smoke. Enemy ailment particles are pooled and capped for crowd readability. These are initial balance values for playtesting. See [formation and ailment tuning](docs/formations-and-ailments.md).
